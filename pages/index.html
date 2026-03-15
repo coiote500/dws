@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b16" />
+    <title>DWX DEV</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <canvas id="bgCanvas"></canvas>
+    <header>
+      <nav>
+        <a href="#hero" class="logo" aria-label="DWX DEV">
+          <img src="../assets/images/logo.svg" alt="DWX DEV" />
+        </a>
+        <ul>
+          <li><a href="#hero">Início</a></li>
+          <li><a href="#projects">Projetos</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section id="hero">
+      <div class="hero-content">
+        <h1>DWX DEV</h1>
+        <p>Desenvolvimento web moderno e inovador.</p>
+        <button class="cta-btn">Saiba Mais</button>
+        <button id="chatBtn" class="cta-btn secondary">Chat com IA</button>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600"
+        alt="Desenvolvimento"
+      />
+    </section>
+    <section id="projects">
+      <h2>Projetos</h2>
+      <div id="projectGrid" class="project-grid">
+        <!-- Projetos estáticos -->
+        <div class="project" data-slug="site-responsivo">
+          <img
+            src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900"
+            alt="Site Responsivo"
+          />
+          <h3>Site Responsivo</h3>
+          <p>Layout fluido que se adapta a qualquer tela.</p>
+          <div class="project-actions">
+            <button class="project-btn details-btn" data-slug="site-responsivo">
+              Ver detalhes
+            </button>
+          </div>
+        </div>
+        <div class="project" data-slug="app-mobile">
+          <img
+            src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900"
+            alt="App Mobile"
+          />
+          <h3>App Mobile</h3>
+          <p>Interfaces intuitivas para uso móvel.</p>
+          <div class="project-actions">
+            <button class="project-btn details-btn" data-slug="app-mobile">
+              Ver detalhes
+            </button>
+          </div>
+        </div>
+        <div class="project" data-slug="ia-integrada">
+          <img
+            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900"
+            alt="IA Integrada"
+          />
+          <h3>IA Integrada</h3>
+          <p>Automação e personalização com inteligência artificial.</p>
+          <div class="project-actions">
+            <button class="project-btn details-btn" data-slug="ia-integrada">
+              Ver detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about">
+      <h2>Sobre Mim</h2>
+      <p>
+        Meu nome é <strong>Daniel Azevedo</strong>, tenho 25 anos e sou um
+        desenvolvedor full-stack que cria interfaces limpas, APIs robustas e
+        experiências interativas com foco em performance e acessibilidade.
+      </p>
+      <div class="skills">
+        <h3>Habilidades</h3>
+        <ul>
+          <li>HTML, CSS, JavaScript (ES6+)</li>
+          <li>React, Node.js, APIs REST/GraphQL</li>
+          <li>Design responsivo, UX/UI e otimização de performance</li>
+        </ul>
+      </div>
+    </section>
+    <section id="contact">
+      <h2>Entre em Contato</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Nome" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <textarea id="message" placeholder="Mensagem" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+    <div id="projectModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalBody">
+          <h2 id="modalTitle"></h2>
+          <img id="modalImg" alt="" />
+          <p id="modalSubtitle"></p>
+          <div id="modalDescription"></div>
+          <div id="modalTags"></div>
+          <ul id="modalFeatures"></ul>
+          <button id="modalNext" class="project-btn">Próximo Projeto</button>
+        </div>
+      </div>
+    </div>
+    <div id="chatModal" class="modal">
+      <div class="modal-content chat-modal">
+        <span class="close" id="chatClose">&times;</span>
+        <h2>Assistente IA</h2>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Digite sua mensagem..."
+          />
+          <button id="sendBtn" class="project-btn">Enviar</button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2026 DWX DEV. Todos os direitos reservados.</p>
+      <p>Contato: Daniel Azevedo • (91) 98112-1705</p>
+    </footer>
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>

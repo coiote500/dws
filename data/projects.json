@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "site-responsivo",
+    "title": "Site Responsivo",
+    "subtitle": "Layout fluido que se adapta a qualquer tela.",
+    "description": "Websites modernos precisam funcionar bem em dispositivos de diferentes tamanhos. Eu desenvolvo interfaces que escalam com graça, mantendo performance e acessibilidade.",
+    "features": [
+      "Grid flexível e layouts adaptativos",
+      "Imagens otimizadas e lazy loading",
+      "Acessibilidade WCAG e navegação por teclado",
+      "Testes em múltiplos navegadores e dispositivos"
+    ],
+    "tech": [
+      "HTML5",
+      "CSS3 (Flexbox/Grid)",
+      "JavaScript (ES6+)",
+      "Auditoria Lighthouse"
+    ],
+    "img": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900"
+  },
+  {
+    "slug": "app-mobile",
+    "title": "App Mobile",
+    "subtitle": "Interfaces intuitivas para uso móvel.",
+    "description": "Foco em UX simples, desempenho e esforço reduzido do usuário. Desenvolvo experiências que funcionam offline, com gestos naturais e navegação clara.",
+    "features": [
+      "Design orientado ao toque e gestos",
+      "Progressive Web App (PWA) opcional",
+      "Animações suaves e micro-interações",
+      "Estratégias de cache e performance"
+    ],
+    "tech": [
+      "React Native / Expo",
+      "PWA",
+      "Service Workers",
+      "APIs REST/GraphQL"
+    ],
+    "img": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900"
+  },
+  {
+    "slug": "ia-integrada",
+    "title": "IA Integrada",
+    "subtitle": "Automação e personalização com inteligência artificial.",
+    "description": "Implemento recursos com IA para melhorar a experiência do usuário, como recomendações inteligentes, assistentes conversacionais e análises preditivas.",
+    "features": [
+      "Chatbots e assistentes",
+      "Recomendações baseadas em comportamento",
+      "Análise de sentimento e NLP",
+      "Prototipagem rápida com APIs de IA"
+    ],
+    "tech": ["OpenAI / GPT", "TensorFlow.js", "APIs REST", "Node.js"],
+    "img": "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=900"
+  }
+]

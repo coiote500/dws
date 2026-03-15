@@ -1,0 +1,107 @@
+body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  color: #e0e0e0;
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
+}
+header {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #00d4ff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+#hero {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+  color: #00d4ff;
+  text-align: center;
+  padding: 100px 20px;
+  position: relative;
+}
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%2300d4ff" opacity="0.1"/></svg>')
+    repeat;
+  animation: float 20s linear infinite;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100px);
+  }
+}
+#hero img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.8);
+  }
+}
+#projects .product {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00d4ff;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
+}
+#projects .product:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+}
+.buyBtn {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.buyBtn:hover {
+  background: linear-gradient(135deg, #0099cc 0%, #00d4ff 100%);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+footer {
+  background: rgba(0, 0, 0, 0.9);
+  border-top: 1px solid #00d4ff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+#hero p {
+  font-size: 24px;
+  animation:
+    typing 3s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #00d4ff;
+  width: 0;
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #00d4ff;
+  }
+}

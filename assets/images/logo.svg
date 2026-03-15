@@ -1,0 +1,12 @@
+<svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d1d5db"/>
+      <stop offset="60%" stop-color="#9ca3af"/>
+      <stop offset="100%" stop-color="#6b7280"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="28" font-family="Segoe UI, Roboto, sans-serif" font-size="28" font-weight="700" fill="url(#grad)">DWX</text>
+  <path d="M120 10 L140 10 L140 14 L126 14 L126 22 L140 22 L140 26 L120 26 Z" fill="#f3f4f6" opacity="0.85"/>
+  <path d="M128 14 L136 20 L128 26" stroke="#9ca3af" stroke-width="2" fill="none"/>
+</svg>

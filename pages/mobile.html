@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b16" />
+    <title>DWX DEV - Mobile</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class="logo" aria-label="DWX DEV">
+          <img src="../assets/images/logo.svg" alt="DWX DEV" />
+        </a>
+        <ul>
+          <li><a href="/">Início</a></li>
+          <li><a href="/#projects">Projetos</a></li>
+          <li><a href="/#about">Sobre</a></li>
+          <li><a href="/#contact">Contato</a></li>
+          <li>
+            <button
+              id="chatBtn"
+              class="cta-btn secondary"
+              style="margin-left: 16px"
+            >
+              Chat IA
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="hero">
+      <div class="hero-content">
+        <h1>Desenvolvimento Mobile</h1>
+        <p>
+          Crio experiências móveis com desempenho sólido, usabilidade intuitiva
+          e fluidez nativa, focando em interação e retenção.
+        </p>
+        <button class="cta-btn" onclick="location.href = '#mobileInfo'">
+          Ver detalhes
+        </button>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600"
+        alt="Aplicativo Mobile"
+      />
+    </section>
+
+    <section id="mobileInfo">
+      <h2>O que o mobile abrange</h2>
+      <div class="project-grid">
+        <div class="project">
+          <h3>Interfaces intuitivas</h3>
+          <p>
+            Navegação por toque, gestos e transições suaves que garantem uma
+            experiência natural em qualquer aparelho.
+          </p>
+        </div>
+        <div class="project">
+          <h3>Performance e otimização</h3>
+          <p>
+            Foco em carregamento rápido, uso eficiente de recursos e suporte a
+            conexões instáveis (offline e cache).
+          </p>
+        </div>
+        <div class="project">
+          <h3>Progressive Web Apps</h3>
+          <p>
+            Transformo aplicações web em PWAs instaláveis, com notificações e
+            comportamento semelhante a apps nativos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2>Tecnologias</h2>
+      <div class="skills">
+        <h3>Ferramentas e frameworks</h3>
+        <ul>
+          <li>React Native / Expo</li>
+          <li>PWA + Service Workers</li>
+          <li>APIs nativas (câmera, geolocalização, armazenamento)</li>
+          <li>Testes automatizados e CI/CD</li>
+        </ul>
+      </div>
+      <div class="centered-links">
+        <a href="/" class="cta-btn">Voltar ao início</a>
+        <a href="/#projects" class="cta-btn secondary">Ver todos os projetos</a>
+      </div>
+    </section>
+
+    <section id="repos">
+      <h2>Repositórios</h2>
+      <p>
+        Código aberto disponível no GitHub. Explore os repositórios e veja como
+        as integrações de IA, mobile e PWA foram construídas.
+      </p>
+      <div id="repoList" class="project-grid"></div>
+      <div class="centered-links">
+        <a
+          href="https://github.com/SEU_USUARIO/dwx-dev"
+          class="cta-btn"
+          target="_blank"
+          rel="noopener"
+          >Ver repositório principal</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 DWX DEV. Todos os direitos reservados.</p>
+      <p>Contato: Daniel Azevedo • (91) 98112-1705</p>
+    </footer>
+
+    <div id="chatModal" class="modal">
+      <div class="modal-content chat-modal">
+        <span class="close" id="chatClose">&times;</span>
+        <h2>Assistente IA</h2>
+        <div id="chatMessages" class="chat-messages"></div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Digite sua mensagem..."
+          />
+          <button id="sendBtn" class="project-btn">Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>
