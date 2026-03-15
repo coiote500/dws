@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b16" />
+    <title>DWX DEV - Admin</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo" aria-label="DWX DEV">
+          <img src="./assets/images/logo.svg" alt="DWX DEV" />
+        </a>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#projects">Projetos</a></li>
+          <li><a href="index.html#about">Sobre</a></li>
+          <li><a href="index.html#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="admin">
+      <section class="admin-panel">
+        <h1>Admin</h1>
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h2>Mensagens recebidas</h2>
+            <button id="refreshMessages" class="project-btn secondary">
+              Atualizar
+            </button>
+            <button id="clearMessages" class="project-btn secondary">
+              Limpar
+            </button>
+            <div id="messages" class="admin-list"></div>
+          </div>
+          <div class="admin-card">
+            <h2>Editar projetos</h2>
+            <div id="projects" class="admin-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 DWX DEV. Todos os direitos reservados.</p>
+      <p>Contato: Daniel Azevedo • (91) 98112-1705</p>
+    </footer>
+
+    <script>
+      const PASSWORD = "admin123"; // Senha simples para acesso
+
+      if (!sessionStorage.getItem("adminAuth")) {
+        const input = prompt("Digite a senha de admin:");
+        if (input !== PASSWORD) {
+          alert("Acesso negado.");
+          window.location.href = "index.html";
+        } else {
+          sessionStorage.setItem("adminAuth", "true");
+        }
+      }
+
+      function formatMessage(raw) {
+        const [date, name, email, message] = raw.split(" | ");
+        return {
+          date,
+          name,
+          email,
+          message,
+        };
+      }
+
+      const staticProjects = {
+        "site-responsivo": {
+          slug: "site-responsivo",
+          title: "Site Responsivo",
+          subtitle: "Layout fluido que se adapta a qualquer tela.",
+          description: "Websites modernos precisam funcionar bem em dispositivos de diferentes tamanhos. Eu desenvolvo interfaces que escalam com graça, mantendo performance e acessibilidade.",
+          features: [
+            "Grid flexível e layouts adaptativos",
+            "Imagens otimizadas e lazy loading",
+            "Acessibilidade WCAG e navegação por teclado",
+            "Testes em múltiplos navegadores e dispositivos"
+          ],
+          tech: [
+            "HTML5",
+            "CSS3 (Flexbox/Grid)",
+            "JavaScript (ES6+)",
+            "Auditoria Lighthouse"
+          ],
+          img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900",
+          next: "app-mobile"
+        },
+        "app-mobile": {
+          slug: "app-mobile",
+          title: "App Mobile",
+          subtitle: "Interfaces intuitivas para uso móvel.",
+          description: "Foco em UX simples, desempenho e esforço reduzido do usuário. Desenvolvo experiências que funcionam offline, com gestos naturais e navegação clara.",
+          features: [
+            "Design orientado ao toque e gestos",
+            "Progressive Web App (PWA) opcional",
+            "Animações suaves e micro-interações",
+            "Estratégias de cache e performance"
+          ],
+          tech: [
+            "React Native / Expo",
+            "PWA",
+            "Service Workers",
+            "APIs REST/GraphQL"
+          ],
+          img: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900",
+          next: "ia-integrada"
+        },
+        "ia-integrada": {
+          slug: "ia-integrada",
+          title: "IA Integrada",
+          subtitle: "Automação e personalização com inteligência artificial.",
+          description: "Implemento recursos com IA para melhorar a experiência do usuário, como recomendações inteligentes, assistentes conversacionais e análises preditivas.",
+          features: [
+            "Chatbots e assistentes",
+            "Recomendações baseadas em comportamento",
+            "Análise de sentimento e NLP",
+            "Prototipagem rápida com APIs de IA"
+          ],
+          tech: ["OpenAI / GPT", "TensorFlow.js", "APIs REST", "Node.js"],
+          img: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=900",
+          next: "site-responsivo"
+        }
+      };
+
+      async function loadMessages() {
+        const container = document.getElementById("messages");
+        container.innerHTML = "<p>Carregando...</p>";
+        // Mocked para GitHub Pages
+        container.innerHTML = "<p>Nenhuma mensagem recebida ainda. (O armazenamento no backend não está disponível no GitHub Pages).</p>";
+      }
+
+      function loadProjects() {
+        const container = document.getElementById("projects");
+        container.innerHTML = "";
+        Object.values(staticProjects).forEach((project) => {
+          const card = document.createElement("div");
+          card.className = "admin-row";
+
+          card.innerHTML = `
+            <div class="admin-row-title">
+              <strong>${project.title}</strong>
+              <span class="muted">${project.slug}</span>
+            </div>
+            <textarea data-slug="${project.slug}" rows="4">${project.description}</textarea>
+            <button data-slug="${project.slug}" class="project-btn secondary">Salvar</button>
+          `;
+
+          const button = card.querySelector("button");
+          button.addEventListener("click", () => {
+            alert("Atenção: A edição de projetos está desativada na versão estática hospedada no GitHub Pages.");
+            button.textContent = "Salvo (Mock)";
+            setTimeout(() => (button.textContent = "Salvar"), 1200);
+          });
+
+          container.appendChild(card);
+        });
+      }
+
+      document
+        .getElementById("refreshMessages")
+        .addEventListener("click", loadMessages);
+      document
+        .getElementById("clearMessages")
+        .addEventListener("click", () => {
+          alert("Limpeza mockada.");
+          loadMessages();
+        });
+
+      loadMessages();
+      loadProjects();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b16" />
+    <title>DWX DEV - Projeto</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo" aria-label="DWX DEV">
+          <img src="./assets/images/logo.svg" alt="DWX DEV" />
+        </a>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#projects">Projetos</a></li>
+          <li><a href="index.html#about">Sobre</a></li>
+          <li><a href="index.html#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="project-page">
+      <section class="project-hero" id="projectHero">
+        <div class="project-hero-content">
+          <h1 id="projectTitle">Carregando...</h1>
+          <p id="projectSubtitle"></p>
+          <div id="projectTags" class="project-tags"></div>
+        </div>
+        <div class="project-hero-image">
+          <img id="projectImage" alt="Projeto" />
+        </div>
+      </section>
+
+      <section class="project-detail" id="projectDetail">
+        <h2>O que inclui</h2>
+        <p id="projectDescription"></p>
+        <ul id="projectFeatures" class="project-features"></ul>
+      </section>
+
+      <section class="project-links">
+        <a href="index.html" class="cta-btn">Voltar ao início</a>
+        <a id="projectNext" class="cta-btn secondary" href="index.html"
+          >Ver outro projeto</a
+        >
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 DWX DEV. Todos os direitos reservados.</p>
+      <p>Contato: Daniel Azevedo • (91) 98112-1705</p>
+    </footer>
+
+    <script>
+      const staticProjects = {
+        "site-responsivo": {
+          slug: "site-responsivo",
+          title: "Site Responsivo",
+          subtitle: "Layout fluido que se adapta a qualquer tela.",
+          description: "Websites modernos precisam funcionar bem em dispositivos de diferentes tamanhos. Eu desenvolvo interfaces que escalam com graça, mantendo performance e acessibilidade.",
+          features: [
+            "Grid flexível e layouts adaptativos",
+            "Imagens otimizadas e lazy loading",
+            "Acessibilidade WCAG e navegação por teclado",
+            "Testes em múltiplos navegadores e dispositivos"
+          ],
+          tech: [
+            "HTML5",
+            "CSS3 (Flexbox/Grid)",
+            "JavaScript (ES6+)",
+            "Auditoria Lighthouse"
+          ],
+          img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900",
+          next: "app-mobile"
+        },
+        "app-mobile": {
+          slug: "app-mobile",
+          title: "App Mobile",
+          subtitle: "Interfaces intuitivas para uso móvel.",
+          description: "Foco em UX simples, desempenho e esforço reduzido do usuário. Desenvolvo experiências que funcionam offline, com gestos naturais e navegação clara.",
+          features: [
+            "Design orientado ao toque e gestos",
+            "Progressive Web App (PWA) opcional",
+            "Animações suaves e micro-interações",
+            "Estratégias de cache e performance"
+          ],
+          tech: [
+            "React Native / Expo",
+            "PWA",
+            "Service Workers",
+            "APIs REST/GraphQL"
+          ],
+          img: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900",
+          next: "ia-integrada"
+        },
+        "ia-integrada": {
+          slug: "ia-integrada",
+          title: "IA Integrada",
+          subtitle: "Automação e personalização com inteligência artificial.",
+          description: "Implemento recursos com IA para melhorar a experiência do usuário, como recomendações inteligentes, assistentes conversacionais e análises preditivas.",
+          features: [
+            "Chatbots e assistentes",
+            "Recomendações baseadas em comportamento",
+            "Análise de sentimento e NLP",
+            "Prototipagem rápida com APIs de IA"
+          ],
+          tech: ["OpenAI / GPT", "TensorFlow.js", "APIs REST", "Node.js"],
+          img: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=900",
+          next: "site-responsivo"
+        }
+      };
+
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function renderProject(project) {
+        document.title = `DWX DEV - ${project.title}`;
+        setText("projectTitle", project.title);
+        setText("projectSubtitle", project.subtitle);
+        setText("projectDescription", project.description);
+
+        const tags = document.getElementById("projectTags");
+        tags.innerHTML = "";
+        project.tech.forEach((tech) => {
+          const chip = document.createElement("span");
+          chip.className = "tag";
+          chip.textContent = tech;
+          tags.appendChild(chip);
+        });
+
+        const features = document.getElementById("projectFeatures");
+        features.innerHTML = "";
+        project.features.forEach((feature) => {
+          const li = document.createElement("li");
+          li.textContent = feature;
+          features.appendChild(li);
+        });
+
+        const img = document.getElementById("projectImage");
+        img.src = project.img;
+        img.alt = project.title;
+
+        const nextLink = document.getElementById("projectNext");
+        nextLink.href = `project.html?id=${project.next || project.slug}`;
+      }
+
+      function getSlug() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("id");
+      }
+
+      (() => {
+        try {
+          const slug = getSlug();
+          if (!slug) throw new Error("Slug inválido");
+          const project = staticProjects[slug];
+          if (!project) throw new Error("Projeto não encontrado");
+          renderProject(project);
+        } catch (err) {
+          setText("projectTitle", "Projeto não encontrado");
+          setText(
+            "projectSubtitle",
+            "Verifique se o link está correto e tente novamente.",
+          );
+          document.getElementById("projectDetail").style.display = "none";
+        }
+      })();
+    </script>
+  </body>
+</html>

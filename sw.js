@@ -1,14 +1,13 @@
 const CACHE_NAME = "dwx-dev-v1";
 const ASSETS = [
-  "/",
-  "/manifest.json",
-  "/assets/css/style.css",
-  "/assets/js/script.js",
-  "/assets/images/logo.svg",
-  "/pages/index.html",
-  "/pages/project.html",
-  "/pages/mobile.html",
-  "/pages/admin.html",
+  "index.html",
+  "manifest.json",
+  "assets/css/style.css",
+  "assets/js/script.js",
+  "assets/images/logo.svg",
+  "project.html",
+  "mobile.html",
+  "admin.html",
 ];
 
 self.addEventListener("install", (event) => {
@@ -45,7 +44,7 @@ self.addEventListener("fetch", (event) => {
             .then((cache) => cache.put(event.request, cloned));
           return res;
         })
-        .catch(() => caches.match("/"));
+        .catch(() => caches.match("index.html"));
     }),
   );
 });

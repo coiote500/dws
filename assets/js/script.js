@@ -169,7 +169,7 @@ setActiveLink();
 function registerServiceWorker() {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
-      .register("/sw.js")
+      .register("sw.js")
       .catch((err) => console.warn("SW registration failed", err));
   }
 }
@@ -178,10 +178,13 @@ async function loadProjects(tech) {
   const container = document.getElementById("projectGrid");
   if (!container || container.children.length > 3) return; // Já tem estáticos, não carregar dinâmicos
 
-  container.innerHTML = "<p>Carregando projetos...</p>";
-  const query = tech ? `?tech=${encodeURIComponent(tech)}` : "";
-  const res = await fetch(`/api/projects${query}`);
-  const projects = await res.json();
+  let projects = Object.values(staticProjects);
+  
+  if (tech) {
+    projects = projects.filter((project) =>
+      project.tech.some((t) => t.toLowerCase().includes(tech.toLowerCase()))
+    );
+  }
 
   if (!projects.length) {
     container.innerHTML = "<p>Nenhum projeto encontrado.</p>";
@@ -209,7 +212,7 @@ async function loadProjects(tech) {
     const details = document.createElement("a");
     details.className = "project-btn";
     details.href =
-      project.slug === "app-mobile" ? "/mobile" : `/project/${project.slug}`;
+      project.slug === "app-mobile" ? "mobile.html" : `project.html?id=${project.slug}`;
     details.textContent = "Ver detalhes";
 
     actions.appendChild(details);
@@ -231,10 +234,11 @@ async function setupProjectPage() {
   const projectTitle = document.getElementById("projectTitle");
   if (!projectTitle) return;
 
-  const slug = window.location.pathname.split("/").pop();
+  const urlParams = new URLSearchParams(window.location.search);
+  const slug = urlParams.get('id') || window.location.pathname.split("/").pop();
   try {
-    const res = await fetch(`/api/projects/${slug}`);
-    const project = await res.json();
+    const project = staticProjects[slug];
+    if (!project) throw new Error("Projeto não encontrado");
 
     document.title = `DWX DEV - ${project.title}`;
     projectTitle.textContent = project.title;
@@ -265,7 +269,7 @@ async function setupProjectPage() {
     img.alt = project.title;
 
     const nextLink = document.getElementById("projectNext");
-    nextLink.href = `/project/${project.next || project.slug}`;
+    nextLink.href = `project.html?id=${project.next || project.slug}`;
   } catch (err) {
     projectTitle.textContent = "Projeto não encontrado";
     document.getElementById("projectSubtitle").textContent =
@@ -276,60 +280,60 @@ async function setupProjectPage() {
 
 const staticProjects = {
   "site-responsivo": {
+    slug: "site-responsivo",
     title: "Site Responsivo",
     subtitle: "Layout fluido que se adapta a qualquer tela.",
-    description:
-      "Websites modernos precisam funcionar bem em dispositivos de diferentes tamanhos. Eu desenvolvo interfaces que escalam com graça, mantendo performance e acessibilidade.",
+    description: "Websites modernos precisam funcionar bem em dispositivos de diferentes tamanhos. Eu desenvolvo interfaces que escalam com graça, mantendo performance e acessibilidade.",
     features: [
       "Grid flexível e layouts adaptativos",
       "Imagens otimizadas e lazy loading",
       "Acessibilidade WCAG e navegação por teclado",
-      "Testes em múltiplos navegadores e dispositivos",
+      "Testes em múltiplos navegadores e dispositivos"
     ],
     tech: [
       "HTML5",
       "CSS3 (Flexbox/Grid)",
       "JavaScript (ES6+)",
-      "Auditoria Lighthouse",
+      "Auditoria Lighthouse"
     ],
     img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900",
-    next: "app-mobile",
+    next: "app-mobile"
   },
   "app-mobile": {
+    slug: "app-mobile",
     title: "App Mobile",
     subtitle: "Interfaces intuitivas para uso móvel.",
-    description:
-      "Foco em UX simples, desempenho e esforço reduzido do usuário. Desenvolvo experiências que funcionam offline, com gestos naturais e navegação clara.",
+    description: "Foco em UX simples, desempenho e esforço reduzido do usuário. Desenvolvo experiências que funcionam offline, com gestos naturais e navegação clara.",
     features: [
       "Design orientado ao toque e gestos",
       "Progressive Web App (PWA) opcional",
       "Animações suaves e micro-interações",
-      "Estratégias de cache e performance",
+      "Estratégias de cache e performance"
     ],
     tech: [
       "React Native / Expo",
       "PWA",
       "Service Workers",
-      "APIs REST/GraphQL",
+      "APIs REST/GraphQL"
     ],
     img: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900",
-    next: "ia-integrada",
+    next: "ia-integrada"
   },
   "ia-integrada": {
+    slug: "ia-integrada",
     title: "IA Integrada",
     subtitle: "Automação e personalização com inteligência artificial.",
-    description:
-      "Implemento recursos com IA para melhorar a experiência do usuário, como recomendações inteligentes, assistentes conversacionais e análises preditivas.",
+    description: "Implemento recursos com IA para melhorar a experiência do usuário, como recomendações inteligentes, assistentes conversacionais e análises preditivas.",
     features: [
       "Chatbots e assistentes",
       "Recomendações baseadas em comportamento",
       "Análise de sentimento e NLP",
-      "Prototipagem rápida com APIs de IA",
+      "Prototipagem rápida com APIs de IA"
     ],
-    tech: ["Python", "TensorFlow", "APIs de IA", "NLP"],
-    img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900",
-    next: "site-responsivo",
-  },
+    tech: ["OpenAI / GPT", "TensorFlow.js", "APIs REST", "Node.js"],
+    img: "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=900",
+    next: "site-responsivo"
+  }
 };
 
 // Modal functionality
@@ -538,17 +542,9 @@ if (contactForm) {
     }
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-      if (!response.ok)
-        throw new Error(result.error || "Erro ao enviar mensagem.");
-
-      alert(result.message || "Mensagem enviada com sucesso!");
+      // Modificado para ambiente estático, simulando o comportamento da API
+      await new Promise(resolve => setTimeout(resolve, 800));
+      alert("A versão atual deste site é estática. Em um ambiente real, esta mensagem seria gravada.");
       this.reset();
     } catch (err) {
       console.error(err);
